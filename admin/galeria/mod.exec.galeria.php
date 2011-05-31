@@ -1,5 +1,5 @@
 <?php
-
+set_time_limit(180); 
 
 if (isset($_FILES)) {
 

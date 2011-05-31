@@ -36,7 +36,7 @@
 
 
 
-    $field  = array('gal_titulo', 'gal_data', 'gal_id');
+    $field  = array('gal_titulo', 'gal_data','gal_cat_id', 'gal_id');
     $lfield = implode(',',$field);
     $vfield = implode(',$',$field);
     $vfield = '$'.$vfield;

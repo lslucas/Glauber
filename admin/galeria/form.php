@@ -41,10 +41,47 @@
 	</li>
 
 
+	<li>	
+	  <label>Área *<span class='small'>Em qual área do site será exibida essa galeria</span></label>
+	  <?php
+	    $statusCat=1;
+
+
+		$sql_categoria = "SELECT cat_id, cat_titulo FROM ".TABLE_PREFIX."_categoria 
+							WHERE cat_status=? AND cat_area='area'";
+
+	    $qry_categoria = $conn->prepare($sql_categoria);
+	    $qry_categoria->bind_param('i', $statusCat);
+	    $qry_categoria->execute();
+	    $qry_categoria->bind_result($id, $nome);
+
+
+	      $i=0;
+	      while ($qry_categoria->fetch()) {
+
+	       if ($act=='update') {
+	        $check[$id] = ($id==$val['cat_id'])?' checked':''; 
+
+	        } else $check[$id] = '';
+
+
+	       if ($i<>0) echo '<br>';
+	  ?>
+	        <input type='radio' class='required' name='cat_id[]' id='cat_id' value='<?=$id?>'<?=$check[$id]?>> <?=$nome?> 
+	  <?php 
+
+	    $i++;
+	    }
+	   $qry_categoria->close();
+	  ?>
+	
+	</li>
 
 
 	<li>	
 	  <label>Fotos<span class='small'><a href='javascript:void(0);' class='addImagem' id='min'>adicionar + fotos</a></span></label>
+	  <span id='min' style='color:#ccc;'>Para alterar a posição da foto, não clique sobre a foto, passe o mouse na coluna ao lado da foto até que fique cinza, clique e arraste para a posição desejada</span>
+	  <br/><br/>
 	  <?php
 	    if ($act=='update') {
 
@@ -61,24 +98,26 @@
 		<tr id="<?=$g_id?>">
 		  <td width='20px' title='Clique e arraste para mudar a posição da foto' class='tip'></td>
 
-		  <td class='small'>
-		    [<a href='?p=<?=$p?>&delete_galeria&item=<?=$g_id?>&prefix=rgi&pre=gal&col=imagem&folder=<?=$var['imagem_folderlist']?>&noVisual' title="Clique para remover o ítem selecionado" class='tip trash-galeria' style="cursor:pointer;" id="<?=$g_id?>">remover</a>]
+		  <td class='small' width='60px' valign=bottom>
+		    [<a href='?p=<?=$p?>&delete_galeria&item=<?=$g_id?>&prefix=r_gal_imagem&pre=rgi&col=imagem&folder=<?=$var['imagem_folderlist']?>&noVisual' title="Clique para remover o ítem selecionado" class='tip trash-galeria' style="cursor:pointer;" id="<?=$g_id?>">remover</a>]
 		  </td>
 
-		  <td>
+		  <td height=60px>
 
+<!--
 		    <a href='$imagThumb<?=$i?>?width=100%' id='imag<?=$i?>' class='betterTip'>
 		     <img src='images/lupa.gif' border='0' style='background-color:none;padding-left:10px;cursor:pointer'></a>
 
-			 <div id='imagThumb<?=$i?>' style='float:left;display:none;'>
+-->
+<!--			 <div id='imagThumb<?=$i?>' style='float:left;display:none;'>-->
 			 <?php 
 			 
 			    if (file_exists(substr($var['path_thumb'],0)."/".$g_imagem))
-			     echo "<img src='".substr($var['path_thumb'],0)."/".$g_imagem."'>";
+			     echo "<img src='".substr($var['path_thumb'],0)."/".$g_imagem."' width=60>";
 
-			       else echo "<center>imagem não existe.</center>";
+			       else echo "[imagem não existe]";
 			  ?>
-			 </div>
+<!--			 </div>-->
 
 		  </td>
 		</tr>

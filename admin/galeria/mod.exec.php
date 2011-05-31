@@ -30,14 +30,16 @@
      #autoinsert
      include_once $rp.'inc.autoinsert.php';
 
+	 $res['cat_id'] = $_POST['cat_id'][0];
      $sql= "UPDATE ".TABLE_PREFIX."_${var['path']} SET
 
   		  ${var['pre']}_titulo=?,
+  		  ${var['pre']}_cat_id=?,
   		  ${var['pre']}_data=?
 	";
      $sql.=" WHERE ${var['pre']}_id=?";
      $qry=$conn->prepare($sql);
-     $qry->bind_param('ssi', $res['titulo'], $res['data'], $res['item']);
+     $qry->bind_param('sisi', $res['titulo'], $res['cat_id'], $res['data'], $res['item']);
      $qry->execute();
 
 

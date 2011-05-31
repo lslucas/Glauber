@@ -2,6 +2,7 @@
 
 $sql = "SELECT  ${var['pre']}_id,
                 ${var['pre']}_titulo,
+                (SELECT cat_titulo FROM ".TABLE_PREFIX."_categoria WHERE cat_id=${var['pre']}_cat_id) cat,
                 ${var['pre']}_status,
                 ${var['pre']}_data data_en,
                 DATE_FORMAT(${var['pre']}_data,'%d/%m/%y') data,
@@ -19,7 +20,7 @@ $sql = "SELECT  ${var['pre']}_id,
 
     #$sql->bind_param('s', $data); 
     $qry->execute();
-    $qry->bind_result($id, $nome, $status, $data_en, $data, $imagem);
+    $qry->bind_result($id, $nome, $cat, $status, $data_en, $data, $imagem);
 ?>
 <h1><?=$var['mono_plural']?></h1>
 <p class='header'></p>
@@ -31,6 +32,7 @@ $sql = "SELECT  ${var['pre']}_id,
         <th width="25px"></th>
         <th width="70px">Data</th>
         <th>Título</th>
+        <th width="70px">Área</th>
       </tr>
    </thead>  
    <tbody>
@@ -82,14 +84,11 @@ $permissoes='';
 	</td>
         <td><?=$data?></td>
         <td>
-	
-	<?=$nome?>
-	<div class='row-actions'><?=$row_actions?></div></td>
-
+			<?=$nome?>
+			<div class='row-actions'><?=$row_actions?></div>
+		</td>
+        <td><?=$cat?></td>
       </tr>
-
-
-
 <?php
      $j++;
     }

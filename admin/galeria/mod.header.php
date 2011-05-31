@@ -134,7 +134,7 @@ $include_js = <<<end
 			success: function(data){
 			 $.unblockUI();
 			 $.growlUI('Remoção',data);  
-			 $('#tr'+id_trash).hide();
+			 $('#'+id_trash).hide();
 			}
 		});
 
@@ -243,7 +243,7 @@ $include_js = <<<end
 
 
 	/* MOSTRA AS ACOES AO PASSAR O MOUSE SOBRE A TR DO ÍTEM DA TABELA*/
-	$('.list tr').bind('mouseenter',function(){
+	$('.posGaleria tr').bind('mouseenter',function(){
 	 $(this).find('.row-actions').css('visibility','visible');
 	}).bind('mouseleave',function(){
 	 $(this).find('.row-actions').css('visibility','hidden');
