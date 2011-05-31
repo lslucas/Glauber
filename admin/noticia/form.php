@@ -98,7 +98,7 @@
 
 	<li>
 	  <label>Data *<span class='small'>Entre com a data</span></label>
-	  <input type='text' id='data' name='data' class='required  highlight-days-67 range-low-<?=date('Y-m-d',strtotime('-2 year'))?> range-high-<?=date('Y-m-d',strtotime('+5 month'))?> split-date' size='10' value='<?=dateen2pt('-',$val['data'],'/')?>'>
+	  <input type='text' id='data' name='data' class='required  highlight-days-67 range-low-<?=date('Y-m-d',strtotime('-2 year'))?> range-high-<?=date('Y-m-d',strtotime('+5 month'))?> split-date' size='10' value='<?=dateen2pt($val['data'],'/')?>'>
 	</li>
 
 
@@ -108,11 +108,12 @@
 	  <textarea name='texto' id='texto' class='required tinymce' cols='80' rows='15'><?=$val['texto']?></textarea>
 	</li>
 
-
+<!--
 	<li>	
 	  <label>Website <span class='small'>Notícia possui algum link</span></label>
 	  <input type='text' name='url' id='url' class='url' value='<?=$val['url']?>'>
 	</li>
+-->
 
     </ol>
 
